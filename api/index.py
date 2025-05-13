@@ -54,3 +54,6 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
+
+def handler(request, **kwargs):
+    return app.wsgi_app(request.environ, ScriptInfo(create_app=lambda: app).load_app().make_response)

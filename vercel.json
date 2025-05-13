@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/**.py": {
+      "excludeFiles": "**/.venv/**"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
