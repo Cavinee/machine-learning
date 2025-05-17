@@ -28,7 +28,6 @@ export function AcademicStep({ formData, updateFormData, validationErrors }: Aca
   }, [formData.degreeType])
 
   const handleDegreeChange = (value: string) => {
-    // When degree changes, reset the degreeType and degreeName
     updateFormData({
       degree: value,
       degreeType: "",
@@ -42,7 +41,6 @@ export function AcademicStep({ formData, updateFormData, validationErrors }: Aca
     setShowCustomDegree(value === "Others")
   }
 
-  // Define degree options based on degree level
   const bachelorDegrees = [
     "B.Ed",
     "B.Com",
@@ -63,7 +61,6 @@ export function AcademicStep({ formData, updateFormData, validationErrors }: Aca
 
   const doctorateDegrees = ["PhD", "Others"]
 
-  // Get the appropriate degree list based on selected degree level
   const getDegreeOptions = () => {
     if (formData.degree === "Bachelor") return bachelorDegrees
     if (formData.degree === "Master") return masterDegrees

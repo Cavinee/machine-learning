@@ -13,7 +13,6 @@ import { MentalHealthStep } from "@/components/form-steps/mental-health-step"
 import { SuccessStep } from "@/components/form-steps/success-step"
 import { Heart, ArrowLeft, ArrowRight } from "lucide-react"
 
-// Define the prediction result type
 interface PredictionResult {
   prediction: number
   message?: string
@@ -44,7 +43,6 @@ export default function WellbeingForm() {
     familyHistory: "",
   })
 
-  // Add state for prediction result
   const [predictionResult, setPredictionResult] = useState<PredictionResult | null>(null)
 
   const [validationErrors, setValidationErrors] = useState<Record<string, boolean>>({})
@@ -114,7 +112,6 @@ export default function WellbeingForm() {
         isValid = false
       }
 
-      // Validate degree name only if "Others" is selected as degree type
       if (
         (formData.degree === "Bachelor" || formData.degree === "Master" || formData.degree === "Doctorate") &&
         formData.degreeType === "Others" &&
@@ -211,7 +208,7 @@ export default function WellbeingForm() {
         financialStress: Number.parseInt(formData.financialStress),
       }
 
-      const response = await fetch("http://localhost:8080/api/predict", {
+      const response = await fetch("https://depression-learning-backend-production.up.railway.app/api/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -222,7 +219,6 @@ export default function WellbeingForm() {
       const result = await response.json()
       console.log("Response from server:", result)
 
-      // Store the prediction result
       setPredictionResult(result)
 
       setStep(5)

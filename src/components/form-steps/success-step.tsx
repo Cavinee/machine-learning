@@ -15,24 +15,22 @@ interface SuccessStepProps {
 export function SuccessStep({ predictionResult }: SuccessStepProps) {
   const prediction = predictionResult?.prediction || 0
 
-  // Determine risk level and color based on prediction value
   const getRiskLevel = () => {
     if (!predictionResult) return { level: "Unknown", color: "gray" }
 
     const prediction = predictionResult.prediction
 
     if (prediction < 0.3) {
-      return { level: "Low Risk", color: "#22c55e" } // green
+      return { level: "Low Risk", color: "#22c55e" }
     } else if (prediction < 0.7) {
-      return { level: "Moderate Risk", color: "#f97316" } // orange
+      return { level: "Moderate Risk", color: "#f97316" }
     } else {
-      return { level: "High Risk", color: "#ef4444" } // red
+      return { level: "High Risk", color: "#ef4444" }
     }
   }
 
   const risk = getRiskLevel()
 
-  // Format prediction as percentage
   const predictionPercent = predictionResult ? `${Math.round(predictionResult.prediction * 100)}%` : "N/A"
 
   return (
@@ -50,7 +48,6 @@ export function SuccessStep({ predictionResult }: SuccessStepProps) {
         </p>
       </div>
 
-      {/* Semi-circle progress bar */}
       <div className="flex flex-col items-center justify-center mt-8">
         <div className="relative">
           <SemiCircleProgressBar
@@ -150,15 +147,12 @@ function SemiCircleProgressBar({
   showPercentage = true,
   className = "",
 }: SemiCircleProgressBarProps) {
-  // Calculate dimensions
   const radius = width / 2 - strokeWidth / 2
   const diameter = radius * 2
   const circumference = Math.PI * diameter
 
-  // Calculate the progress (0 to 1)
   const progress = Math.min(Math.max(value / max, 0), 1)
 
-  // Calculate the dash offset
   const dashOffset = circumference * (1 - progress / 2)
 
   return (
@@ -168,7 +162,6 @@ function SemiCircleProgressBar({
         height={width / 2} 
         style={{ overflow: "visible" }}
       >
-        {/* Both arcs share the same coordinate system and transformation */}
         <g transform={`rotate(-180 ${width/2} ${width/2})`}>
           {/* Background arc */}
           <circle
@@ -176,13 +169,12 @@ function SemiCircleProgressBar({
             cy={width / 2}
             r={radius}
             fill="none"
-            stroke="#e5e7eb" // Light gray background
+            stroke="#e5e7eb"
             strokeWidth={strokeWidth}
             strokeDasharray={circumference}
             strokeDashoffset={circumference / 2}
           />
           
-          {/* Foreground arc (progress) */}
           <circle
             cx={width / 2}
             cy={width / 2}
