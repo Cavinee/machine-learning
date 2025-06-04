@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Clock, Moon, Utensils } from "lucide-react"
 
@@ -136,17 +135,17 @@ export function LifestyleStep({ formData, updateFormData, validationErrors }: Li
         <div>
           <div className="flex items-center gap-2 mb-2">
             <Clock className="text-green-600" size={18} />
-            <Label htmlFor="workStudyHours" className="text-gray-700 font-medium flex items-center">
-              Work/Study Hours (per day) <span className="text-red-500 ml-1">*</span>
+            <Label htmlFor="studyHours" className="text-gray-700 font-medium flex items-center">
+              Study Hours (per day) <span className="text-red-500 ml-1">*</span>
             </Label>
           </div>
-          <Select value={formData.workStudyHours} onValueChange={(value) => updateFormData({ workStudyHours: value })}>
+          <Select value={formData.studyHours} onValueChange={(value) => updateFormData({ studyHours: value })}>
             <SelectTrigger
               className={`w-full rounded-xl ${
-                validationErrors.workStudyHours ? "border-red-300 ring-1 ring-red-300" : "border-gray-300"
+                validationErrors.studyHours ? "border-red-300 ring-1 ring-red-300" : "border-gray-300"
               }`}
             >
-              <SelectValue placeholder="Select your daily work/study hours" />
+              <SelectValue placeholder="Select your daily study hours" />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((hours) => (
@@ -156,83 +155,9 @@ export function LifestyleStep({ formData, updateFormData, validationErrors }: Li
               ))}
             </SelectContent>
           </Select>
-          {validationErrors.workStudyHours && (
+          {validationErrors.studyHours && (
             <p className="text-red-500 text-sm mt-1">Work/study hours are required</p>
           )}
-        </div>
-
-        <div>
-          <Label className="text-gray-700 font-medium flex items-center">
-            Work Pressure (0-5) <span className="text-red-500 ml-1">*</span>
-          </Label>
-          <div className="mt-2">
-            <RadioGroup
-              value={formData.workPressure}
-              onValueChange={(value) => updateFormData({ workPressure: value })}
-              className="flex flex-wrap gap-3"
-            >
-              {[0, 1, 2, 3, 4, 5].map((value) => (
-                <div key={value} className="flex flex-col items-center">
-                  <RadioGroupItem value={value.toString()} id={`work-${value}`} className="sr-only" />
-                  <Label
-                    htmlFor={`work-${value}`}
-                    className={`
-                      cursor-pointer h-12 w-12 rounded-full flex items-center justify-center text-lg font-medium
-                      ${
-                        formData.workPressure === value.toString()
-                          ? "bg-green-600 text-white"
-                          : "bg-green-100 text-green-800 hover:bg-green-200"
-                      }
-                    `}
-                  >
-                    {value}
-                  </Label>
-                  <span className="text-xs mt-1 text-gray-500">
-                    {value === 0 ? "None" : value === 5 ? "Extreme" : ""}
-                  </span>
-                </div>
-              ))}
-            </RadioGroup>
-            {validationErrors.workPressure && (
-              <p className="text-red-500 text-sm mt-2">Work pressure rating is required</p>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <Label className="text-gray-700 font-medium flex items-center">
-            Job Satisfaction (0-5) <span className="text-red-500 ml-1">*</span>
-          </Label>
-          <div className="mt-2">
-            <RadioGroup
-              value={formData.jobSatisfaction}
-              onValueChange={(value) => updateFormData({ jobSatisfaction: value })}
-              className="flex flex-wrap gap-3"
-            >
-              {[0, 1, 2, 3, 4, 5].map((value) => (
-                <div key={value} className="flex flex-col items-center">
-                  <RadioGroupItem value={value.toString()} id={`job-${value}`} className="sr-only" />
-                  <Label
-                    htmlFor={`job-${value}`}
-                    className={`
-                      cursor-pointer h-12 w-12 rounded-full flex items-center justify-center text-lg font-medium
-                      ${
-                        formData.jobSatisfaction === value.toString()
-                          ? "bg-green-600 text-white"
-                          : "bg-green-100 text-green-800 hover:bg-green-200"
-                      }
-                    `}
-                  >
-                    {value}
-                  </Label>
-                  <span className="text-xs mt-1 text-gray-500">{value === 0 ? "Low" : value === 5 ? "High" : ""}</span>
-                </div>
-              ))}
-            </RadioGroup>
-            {validationErrors.jobSatisfaction && (
-              <p className="text-red-500 text-sm mt-2">Job satisfaction rating is required</p>
-            )}
-          </div>
         </div>
       </div>
     </div>

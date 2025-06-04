@@ -23,13 +23,9 @@ export default function WellbeingForm() {
   const [formData, setFormData] = useState({
     gender: "",
     age: "",
-    profession: "",
-    otherProfession: "",
     academicPressure: "",
-    workPressure: "",
     cgpa: "",
     studySatisfaction: "",
-    jobSatisfaction: "",
     sleepDuration: "",
     otherSleepDuration: "",
     dietaryHabits: "",
@@ -38,7 +34,7 @@ export default function WellbeingForm() {
     degreeType: "",
     degreeName: "",
     suicidalThoughts: "",
-    workStudyHours: "",
+    studyHours: "",
     financialStress: "",
     familyHistory: "",
   })
@@ -91,14 +87,6 @@ export default function WellbeingForm() {
         errors.age = true
         isValid = false
       }
-      if (!formData.profession) {
-        errors.profession = true
-        isValid = false
-      }
-      if (formData.profession === "Others" && !formData.otherProfession) {
-        errors.otherProfession = true
-        isValid = false
-      }
     } else if (step === 2) {
       if (!formData.degree) {
         errors.degree = true
@@ -149,16 +137,8 @@ export default function WellbeingForm() {
         errors.otherDietaryHabits = true
         isValid = false
       }
-      if (!formData.workStudyHours) {
-        errors.workStudyHours = true
-        isValid = false
-      }
-      if (!formData.workPressure) {
-        errors.workPressure = true
-        isValid = false
-      }
-      if (!formData.jobSatisfaction) {
-        errors.jobSatisfaction = true
+      if (!formData.studyHours) {
+        errors.studyHours = true
         isValid = false
       }
     } else if (step === 4 && attemptedValidation) {
@@ -200,11 +180,9 @@ export default function WellbeingForm() {
         ...formData,
         age: Number.parseFloat(formData.age),
         academicPressure: Number.parseInt(formData.academicPressure),
-        workPressure: Number.parseInt(formData.workPressure),
         cgpa: Number.parseFloat(formData.cgpa),
         studySatisfaction: Number.parseInt(formData.studySatisfaction),
-        jobSatisfaction: Number.parseInt(formData.jobSatisfaction),
-        workStudyHours: Number.parseInt(formData.workStudyHours),
+        studyHours: Number.parseInt(formData.studyHours),
         financialStress: Number.parseInt(formData.financialStress),
       }
 
